@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="box">
+    <script id="template1" type="text/html">
+      {{ each $data }}
+      <div>
+        姓名: {{ $value.name }}
+        <br>
+        性别: {{ $value.sex | sexFormatter }}
+      </div>
+      {{ /each }}
+    </script>
+  </div>
+  <script src="js/template-web.js"></script>
+  <script src="js/jquery.js"></script>
+  <script>
+    let data = [{
+      id: 1,
+      name: '张三',
+      sex: 0
+    }, {
+      id: 2,
+      name: '李四',
+      sex: 1
+    }, {
+      id: 3,
+      name: '王五',
+      sex: 0
+    }]
+    template.defaults.imports.sexFormatter = function (type) {
+      if (type === 0) {
+        return '男'
+      } else if (type === 1) {
+        return '女'
+      }
+    }
+    let html = template('template1', data)
+    $('.box').html(html)
+
+  </script>
+</body>
+
+</html>
