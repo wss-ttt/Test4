@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      height: 500px;
+      width: 500px;
+      background: #ccc;
+      overflow: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <script id="template1" type="text/html">
+      {{ each $data }}
+      <div>
+        姓名: {{ $value.name }}
+        <br>
+        性别: {{ $value.sex | sexFormatter }}
+      </div>
+      {{ /each }}
+    </script>
+  </div>
+  <script src="js/template-web.js"></script>
+  <script src="js/jquery.js"></script>
+  <script>
+    let data = []
+
+    template.defaults.imports.sexFormatter = function (type) {
+      if (type === 0) {
+        return '男'
+      } else if (type === 1) {
+        return '女'
+      }
+    }
+
+    function getData() {
+      for (let i = 0; i < 360; i++) {
+        data.push({
+          id: i,
+          name: '张三' + i,
+          sex: 0
+        })
+      }
+    }
+
+    function initList(data) {
+      let html = template('template1', data)
+      $('.box').append(html)
+    }
+
+    let timeChunk = function (ary, fn, count) {
+      let obj, t
+      let len = ary.length
+      let start = function () {
+        for (let i = 0; i < Math.min(count || 1, ary.length); i++) {
+          let obj = ary.shift()
+          fn([obj])
+        }
+      }
+      return function () {
+        t = setInterval(() => {
+          if (ary.length === 0) {
+            // 如果全部节点都已经创建好
+            return clearInterval(t)
+          }
+          start()
+        }, 200)
+      }
+    }
+
+    let r = timeChunk(data, initList, 3)
+    getData()
+    r()
+  </script>
+</body>
+
+</html>
