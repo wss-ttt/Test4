@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="box">
+    </script>
+  </div>
+  <script src="js/template-web.js"></script>
+  <script src="js/jquery.js"></script>
+  <script>
+    let option = {
+      age: 18,
+      info: {
+        tel: '110'
+      }
+    }
+
+    function swiperOption() {
+      return {
+        age: 18,
+        info: {
+          tel: '110'
+        }
+      }
+    }
+
+    let p = {
+      ...swiperOption(),
+      name: '张三'
+    }
+    p.age = 20
+    p.info.tel = '220'
+    let p2 = {
+      ...swiperOption(),
+      name: '李四'
+    }
+    console.log('p', p)
+    console.log('p2', p2)
+  </script>
+</body>
+
+</html>
