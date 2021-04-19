@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>amis demo</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    #app {
+      width: 40%;
+    }
+
+    .item .title {
+      font-size: 20px;
+      font-weight: bold;
+      position: -webkit-sticky;
+      position: sticky;
+      top: 0;
+      background: #fb3;
+      color: #fff
+    }
+
+    .item .content {
+      height: 300px;
+      background-color: #eee;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div class="item" v-for="i in 10" :key="i">
+      <div class="title">好好学习{{ i }}</div>
+      <div class="content">给我一首歌的时间{{ i }}</div>
+    </div>
+  </div>
+</body>
+<script src="js/vue.js"></script>
+<script type="text/javascript">
+  new Vue({
+    el: '#app',
+    data() {
+      return {}
+    }
+  })
+</script>
+
+</html>

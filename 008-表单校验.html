@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <form action="#" id="userForm" method="post">
+    用户名：<input type="text" name="name" id="name">
+    <br>
+    年龄: <input type="text" name="age" />
+    <br><input type="submit" value="提交">
+  </form>
+  <script src="js/jquery.js"></script>
+  <script src="js/jquery.validate.js"></script>
+  <script>
+    $(function () {
+      var $userForm = $("#userForm");
+      $userForm.validate({
+        rules: {
+          name: {
+            required: true,
+            max: 150
+          },
+          age: {
+            required: true,
+          }
+        }
+      });
+    })
+  </script>
+</body>
+
+</html>

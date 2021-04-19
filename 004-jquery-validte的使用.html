@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <form action="#" method="post" id="formT">
+    <label>密码：</label><input type="password" name="password" id="password" />
+    <br />
+    <label>邮箱：</label><input type="text" name="email" id="email" /><br />
+    <label>手机：</label><input type="text" name="phone" id="phone" /><br />
+    <label>性别:</label><br />
+    <label>男：</label>
+    <input type="checkbox" name="male" id="male" value="sex" />
+    <label>女：</label>
+    <input type="checkbox" name="female" id="female" value="" />
+    <br />
+    <button type="button">确定</button>
+  </form>
+  <script src="js/jquery.js"></script>
+  <script src="js/jquery-validate.js"></script>
+  <script>
+    $(function () {
+      var validate = $("#formT").validate({
+        //调试模式为true会取消submit的默认提交功能  
+        debug: true,
+        //errorClass: "label.error", //默认为错误的样式类为：error   
+        //当为false时，验证无效时，没有焦点响应    
+        focusInvalid: false,
+        onkeyup: false,
+        submitHandler: function (form) {
+          alert('提交表单！');
+          form.submit();
+        },
+        //校验规则  
+        rules: {
+          password: {
+            required: true,
+            rangelength: [4, 10]
+          },
+          email: {
+            required: true,
+            email: true
+          },
+          phone: {
+            required: true,
+            isPhone: true
+          },
+          sex: {
+            required: true
+          }
+        },
+        //对应规则给出的提示信息  
+        messages: {
+          password: {
+            required: '必填',
+            rangelength: $.validator.format("密码最小长度:{4},最大长度{10}")
+          },
+          email: {
+            required: "必填",
+            email: "请输入正确的email格式！"
+          },
+          phone: {
+            required: "必填想",
+            isPhone: "请输入正确的手机号！"
+          },
+          sex: {
+            required: "必填"
+          }
+        }
+      });
+    })
+
+    $('button').on('click', function() {
+      if($('form').validate()) {
+        console.log(1)
+      }
+    })
+  </script>
+</body>
+
+</html>

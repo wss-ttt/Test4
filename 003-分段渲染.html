@@ -52,12 +52,15 @@
 
     function initList(data) {
       let html = template('template1', data)
+      console.log('aaa');
+      console.log("initList -> html", html)
       $('.box').append(html)
     }
 
     let timeChunk = function (ary, fn, count) {
       let obj, t
       let len = ary.length
+      console.log("timeChunk -> len", len)
       let start = function () {
         for (let i = 0; i < Math.min(count || 1, ary.length); i++) {
           let obj = ary.shift()

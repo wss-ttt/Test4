@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  jQuery是一个快速、简洁的JavaScript框架，是继Prototype之后又一个优秀的JavaScript代码库（或JavaScript框架）。jQuery设计的宗旨是“write Less，Do More”
+  <div>
+    我们需要快速的发展，哈哈这是为什么了了javascript
+  </div>
+  <script>
+    //这一种更稳定一些
+    window.onload = function () {
+      var words = ['快速', 'JavaScript']; //单引号中填写敏感词，逗号分隔不分大小写
+      for (var i = 0; i < words.length; i++) {
+        document.body.innerHTML = document.body.innerHTML.replace(new RegExp(words[i], 'ig'), '**');
+      };
+    }
+    var a = 'aa'
+    console.log('aaa')
+  </script>
+</body>
+
+</html>
