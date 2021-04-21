@@ -10,32 +10,30 @@
   <meta name="description" content="" />
   <script type="text/javascript" src="js/vue.js"></script>
   <style>
+    * {
+      margin: 0px;
+      padding: 0px;
+    }
+
     .page-bar {
       margin: 40px;
     }
 
     ul,
     li {
-      margin: 0px;
-      padding: 0px;
-    }
 
-    li {
       list-style: none
     }
 
-    .page-bar li:first-child>a {
-      /* margin-left: 0px */
+    .page-bar ul {
+      display: flex;
     }
 
     .page-bar a {
       border: 1px solid #ddd;
       text-decoration: none;
-      position: relative;
-      float: left;
       padding: 6px 12px;
       margin-left: -1px;
-      line-height: 1.42857143;
       color: #337ab7;
       cursor: pointer
     }
@@ -44,7 +42,7 @@
       background-color: #eee;
     }
 
-    .page-bar a.banclick {
+    .page-bar a.ban-click {
       cursor: not-allowed;
     }
 
@@ -67,13 +65,13 @@
 <body>
   <div class="page-bar">
     <ul>
-      <li v-if="cur > 1"><a v-on:click="cur--,pageClick()">上一页</a></li>
-      <li v-if="cur === 1"><a class="banclick">上一页</a></li>
-      <li v-for="index in indexs" v-bind:class="{ 'active': cur == index}">
-        <a v-on:click="btnClick(index)">{{ index }}</a>
+      <li v-if="cur > 1"><a @click="cur--,pageClick()">上一页</a></li>
+      <li v-if="cur === 1"><a class="ban-click">上一页</a></li>
+      <li v-for="index in indexs" :class="{ 'active': cur == index}">
+        <a @click="btnClick(index)">{{ index }}</a>
       </li>
-      <li v-if="cur!=all"><a v-on:click="cur++,pageClick()">下一页</a></li>
-      <li v-if="cur == all"><a class="banclick">下一页</a></li>
+      <li v-if="cur !== all"><a @click="cur++,pageClick()">下一页</a></li>
+      <li v-if="cur === all"><a class="ban-click">下一页</a></li>
       <li><a>共<i>{{all}}</i>页</a></li>
     </ul>
   </div>
@@ -81,7 +79,7 @@
     let pageBar = new Vue({
       el: '.page-bar',
       data: {
-        all: 140, //总页数
+        all: 15, //总页数
         cur: 1 //当前页码
       },
       watch: {
@@ -90,28 +88,28 @@
         }
       },
       methods: {
-        btnClick (data) { //页码点击事件
+        btnClick(data) { //页码点击事件
           if (data != this.cur) {
             this.cur = data
             this.pageClick()
           }
         },
-        pageClick () {
+        pageClick() {
           console.log('现在在' + this.cur + '页');
         }
       },
 
       computed: {
-        indexs () {
+        indexs() {
           let left = 1;
           let right = this.all;
           let ar = [];
           // 1.当数据总数  >= 5 时
-          if(this.all >= 5) {
+          if (this.all >= 5) {
             // 2.同时 当前页码 >= 3 时
-            if(this.cur > 3) {
+            if (this.cur > 3) {
               // 3.同时 当前页码 < 总页码 - 2 时 (eg: 总页码为14时, 那么就是: 当前页码 < 12 )
-              if(this.cur < this.all - 2) {
+              if (this.cur < this.all - 2) {
                 // 把当前的放在中间(核心)
                 left = this.cur - 2
                 right = this.cur + 2
