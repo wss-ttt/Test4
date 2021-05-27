@@ -1,0 +1,11 @@
+<svg viewBox="0 0 100 100"><path class="el-progress-circle__track" d="
+          M 50 50
+          m 0 47
+          a 47 47 0 1 1 0 -94
+          a 47 47 0 1 1 0 94
+          " stroke="#e5e9f2" stroke-width="4.8" fill="none" style="stroke-dasharray: 221.482px, 295.31px; stroke-dashoffset: -36.9137px;"></path><path class="el-progress-circle__path" d="
+          M 50 50
+          m 0 47
+          a 47 47 0 1 1 0 -94
+          a 47 47 0 1 1 0 94
+          " stroke="#e6a23c" fill="none" stroke-linecap="round" stroke-width="4.8" style="stroke-dasharray: 66.4447px, 295.31px; stroke-dashoffset: -36.9137px; transition: stroke-dasharray 0.6s ease 0s, stroke 0.6s ease 0s;"></path></svg>
