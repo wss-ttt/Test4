@@ -34,15 +34,15 @@
     }
 
     .normal {
-      stroke: #03C1FF!important;
+      stroke: #03C1FF !important;
     }
 
     .warning {
-      stroke: #00FF00!important;
+      stroke: #00FF00 !important;
     }
 
     .abnormal {
-      stroke: #FFA500!important;
+      stroke: #FFA500 !important;
     }
 
     @keyframes shink {
@@ -454,6 +454,12 @@
         <circle id="椭圆_772_拷贝_2-4" data-name="椭圆 772 拷贝 2" cx="1272.14" cy="1075.3" r="28.86" />
         <circle id="椭圆_772-4" data-name="椭圆 772" cx="1254.83" cy="1047.58" r="28.86" />
       </g>
+      <!-- 自创互感器 -->
+      <g id="组_54_拷贝_15" data-name="组 54 拷贝 14" class="transformer">
+        <circle id="椭圆_772_拷贝_14" data-name="椭圆 772 拷贝 14" cx="1330.14" cy="1177.3" r="28.86" />
+        <circle id="椭圆_772_拷贝_2-4" data-name="椭圆 772 拷贝 2" cx="1372.14" cy="1175.3" r="28.86" />
+        <circle id="椭圆_772-4" data-name="椭圆 772" cx="1354.83" cy="1147.58" r="28.86" />
+      </g>
       <g id="字" class="cls-8">
         <text id="II母线" class="cls-9" transform="translate(1212.188 1611.156) scale(1.331 1.331)">II<tspan
             class="cls-10">母线</tspan></text>
@@ -542,7 +548,17 @@
       "cdata": {
         "val": -1.903,
         "status": 2
-      }
+      },
+      "datas": [{
+        "val": 0.067,
+        "status": 1
+      }, {
+        "val": 0.082,
+        "status": 1
+      }, {
+        "val": -1.903,
+        "status": 2
+      }]
     },
     {
       "positionId": 5,
@@ -590,21 +606,36 @@
         "status": 0
       }
     }
-  ].slice(0, 1)
+  ].slice(0, 2)
 </script>
 <script>
   console.log('list', list)
-  $('.transformer').on('click', function () {
-    console.log('点击了')
-  })
   const classType = ['normal', 'warning', 'abnormal']
-  list.forEach((item) => {
+  const trans = document.querySelectorAll('.transformer')
+  list.forEach((item, index) => {
     //  $('.transformer circle').addClass('warning')
     let datas = item.datas
-    datas.forEach((item, index) => {
-      $('.transformer circle').eq(index).addClass(classType[item['status']])
+    datas.forEach((item, jndex) => {
+      // jq写法
+      // $('.transformer').eq(index).find('circle').eq(jndex).addClass(classType[item['status']])
+
+      // 原生js写法
+      trans[index].children[jndex].classList.add(classType[item['status']])
     })
   })
+
+
+  // 添加单击事件
+  for (let i = 0; i < trans.length; i++) {
+    trans[i].onclick = function () {
+      showPicture(list[i]['positionId'], list[i]['positionNum'], list[i]['positionName'], i)
+    }
+  }
+
+  // 显示互感器画像
+  function showPicture(positionId, positionNum, positionName, index) {
+    console.log(positionId, positionNum, positionName, index)
+  }
 </script>
 
 </html>
