@@ -25,6 +25,47 @@
     .transformer {
       cursor: pointer;
     }
+
+    .transformer circle {
+      fill: none;
+      stroke-width: 4;
+      stroke: #03C1FF;
+      animation: shink 1s infinite ease-in-out;
+    }
+
+    .normal {
+      stroke: #03C1FF!important;
+    }
+
+    .warning {
+      stroke: #00FF00!important;
+    }
+
+    .abnormal {
+      stroke: #FFA500!important;
+    }
+
+    @keyframes shink {
+      0% {
+        opacity: 1;
+      }
+
+      25% {
+        opacity: 0.75;
+      }
+
+      50% {
+        opacity: 0.5;
+      }
+
+      75% {
+        opacity: 0.25;
+      }
+
+      100% {
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 
@@ -351,7 +392,7 @@
       <!-- 互感器组-->
 
       <!-- 第一组互感器 -->
-      <g id="组_54_拷贝_11" data-name="组 54 拷贝 11" class="transformer">
+      <!-- <g id="组_54_拷贝_11" data-name="组 54 拷贝 11" class="transformer">
         <g id="组_63" data-name="组 63" class="cls-5">
           <path id="椭圆_772_拷贝_12" data-name="椭圆 772 拷贝 12" class="cls-6"
             d="M1241.12,280.819a28.86,28.86,0,1,1-28.86,28.86A28.859,28.859,0,0,1,1241.12,280.819Z" />
@@ -364,9 +405,9 @@
           <path id="椭圆_772" data-name="椭圆 772" class="cls-6"
             d="M1261.81,252.132a28.86,28.86,0,1,1-28.86,28.859A28.859,28.859,0,0,1,1261.81,252.132Z" />
         </g>
-      </g>
+      </g> -->
       <!-- 第二组互感器 -->
-      <g id="组_54_拷贝_12" data-name="组 54 拷贝 12" class="transformer">
+      <!-- <g id="组_54_拷贝_12" data-name="组 54 拷贝 12" class="transformer">
         <g id="组_63-2" data-name="组 63" class="cls-5">
           <circle id="椭圆_772_拷贝_13" data-name="椭圆 772 拷贝 13" class="cls-7" cx="1240.5" cy="794.671" r="28.84" />
         </g>
@@ -377,9 +418,9 @@
           <path id="椭圆_772-2" data-name="椭圆 772" class="cls-6"
             d="M1258.19,738.1a28.859,28.859,0,1,1-28.86,28.859A28.865,28.865,0,0,1,1258.19,738.1Z" />
         </g>
-      </g>
+      </g> -->
       <!-- 第三组互感器 -->
-      <g id="组_54_拷贝_13" data-name="组 54 拷贝 13" class="transformer">
+      <!-- <g id="组_54_拷贝_13" data-name="组 54 拷贝 13" class="transformer">
         <g id="组_63-3" data-name="组 63" class="cls-5">
           <path id="椭圆_772_拷贝_15" data-name="椭圆 772 拷贝 15" class="cls-6"
             d="M1243.78,1498.01a28.86,28.86,0,1,1-28.86,28.86A28.859,28.859,0,0,1,1243.78,1498.01Z" />
@@ -391,18 +432,27 @@
         <g id="组_63_拷贝_2-3" data-name="组 63 拷贝 2" class="cls-5">
           <circle id="椭圆_772-3" data-name="椭圆 772" class="cls-7" cx="1259.45" cy="1499.14" r="28.86" />
         </g>
-      </g>
+      </g> -->
       <!-- 第四组互感器 -->
       <g id="组_54_拷贝_14" data-name="组 54 拷贝 14" class="transformer">
-        <g id="组_63-4" data-name="组 63" class="cls-5">
-          <circle id="椭圆_772_拷贝_14" data-name="椭圆 772 拷贝 14" class="cls-7" cx="1238.14" cy="1077.3" r="28.86" />
+        <!-- <g id="组_63-4" data-name="组 63" class="cls-5">
+          <circle id="椭圆_772_拷贝_14" data-name="椭圆 772 拷贝 14" cx="1238.14" cy="1077.3" r="28.86" class="cls-7" />
+          <circle id="椭圆_772_拷贝_14" data-name="椭圆 772 拷贝 14" cx="1238.14" cy="1077.3" r="28.86" class="cls-7" />
+          <circle id="椭圆_772_拷贝_14" data-name="椭圆 772 拷贝 14" cx="1238.14" cy="1077.3" r="28.86" class="cls-7" />
         </g>
         <g id="组_63_拷贝-4" data-name="组 63 拷贝" class="cls-5">
-          <circle id="椭圆_772_拷贝_2-4" data-name="椭圆 772 拷贝 2" class="cls-7" cx="1272.14" cy="1075.3" r="28.86" />
+          <circle id="椭圆_772_拷贝_2-4" data-name="椭圆 772 拷贝 2" cx="1272.14" cy="1075.3" r="28.86" class="cls-7" />
+          <circle id="椭圆_772_拷贝_2-4" data-name="椭圆 772 拷贝 2" cx="1272.14" cy="1075.3" r="28.86" class="cls-7" />
+          <circle id="椭圆_772_拷贝_2-4" data-name="椭圆 772 拷贝 2" cx="1272.14" cy="1075.3" r="28.86" class="cls-7" />
         </g>
         <g id="组_63_拷贝_2-4" data-name="组 63 拷贝 2" class="cls-5">
-          <circle id="椭圆_772-4" data-name="椭圆 772" class="cls-7" cx="1254.83" cy="1047.58" r="28.86" />
-        </g>
+          <circle id="椭圆_772-4" data-name="椭圆 772" cx="1254.83" cy="1047.58" r="28.86" class="cls-7" />
+          <circle id="椭圆_772-4" data-name="椭圆 772" cx="1254.83" cy="1047.58" r="28.86" class="cls-7" />
+          <circle id="椭圆_772-4" data-name="椭圆 772" cx="1254.83" cy="1047.58" r="28.86" class="cls-7" />
+        </g> -->
+        <circle id="椭圆_772_拷贝_14" data-name="椭圆 772 拷贝 14" cx="1238.14" cy="1077.3" r="28.86" />
+        <circle id="椭圆_772_拷贝_2-4" data-name="椭圆 772 拷贝 2" cx="1272.14" cy="1075.3" r="28.86" />
+        <circle id="椭圆_772-4" data-name="椭圆 772" cx="1254.83" cy="1047.58" r="28.86" />
       </g>
       <g id="字" class="cls-8">
         <text id="II母线" class="cls-9" transform="translate(1212.188 1611.156) scale(1.331 1.331)">II<tspan
@@ -451,12 +501,25 @@
       },
       "bdata": {
         "val": 0.175,
-        "status": 0
+        "status": 1
       },
       "cdata": {
         "val": 0.138,
-        "status": 0
-      }
+        "status": 2
+      },
+      "datas": [{
+          "val": 0.07,
+          "status": 0
+        },
+        {
+          "val": 0.175,
+          "status": 1
+        },
+        {
+          "val": 0.138,
+          "status": 2
+        }
+      ]
     },
     {
       "positionId": 8,
@@ -527,12 +590,20 @@
         "status": 0
       }
     }
-  ]
+  ].slice(0, 1)
 </script>
 <script>
   console.log('list', list)
   $('.transformer').on('click', function () {
     console.log('点击了')
+  })
+  const classType = ['normal', 'warning', 'abnormal']
+  list.forEach((item) => {
+    //  $('.transformer circle').addClass('warning')
+    let datas = item.datas
+    datas.forEach((item, index) => {
+      $('.transformer circle').eq(index).addClass(classType[item['status']])
+    })
   })
 </script>
 
