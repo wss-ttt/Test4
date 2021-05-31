@@ -6,41 +6,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-    }
-
     .box {
-      width: 2500px;
-      height: 1800px;
-      background: url(images/method-draw-image.svg) no-repeat center;
-      /* background-size: 2500px 1740px; */
-      background-size: 100%;
-      border: 1px solid red;
-      position: relative;
-      font-size: 32px;
+      width: 100px;
+      height: 100px;
+      background-color: #ccc;
+      /*调用动画 默认是加速减速的效果*/
+      animation: move 2s 2;
+      /*此处动画会执行3次 infinite 无线执行 alternate 来回运动 linear；匀速运动*/
     }
 
-    .p0 {
-      position: absolute;
-      left: 16.5%;
-      top: 28%;
-    }
 
-    .p1 {
-      position: absolute;
-      left: 5%;
-      top: 45%;
+    /*定义动画*/
+    @keyframes move {
+      form {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(400px);
+      }
     }
   </style>
 </head>
 
 <body>
-  <div class="box">
-    <!-- <span class="p0">母联</span> -->
-    <!-- <span class="p1">220kV Ⅰ母线</span> -->
-  </div>
+  <div class="box"></div>
 </body>
 
 </html>

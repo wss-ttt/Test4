@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .box {
+      width: 1000px;
+      height: 1000px;
+      background: #0D2C71;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .transformer {
+      cursor: pointer;
+    }
+
+    .transformer circle {
+      fill: transparent;
+      /*转换成透明色*/
+      stroke-width: 4;
+      stroke: #03C1FF;
+      animation: shink 1s infinite ease-in-out;
+    }
+
+    .normal {
+      stroke: #03C1FF !important;
+    }
+
+    .warning {
+      stroke: #00FF00 !important;
+    }
+
+    .abnormal {
+      stroke: #FFA500 !important;
+    }
+
+    @keyframes shink {
+      0% {
+        opacity: 1;
+      }
+
+      25% {
+        opacity: 0.75;
+      }
+
+      50% {
+        opacity: 0.5;
+      }
+
+      75% {
+        opacity: 0.25;
+      }
+
+      100% {
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="1000"
+      viewBox="0 0 1000 1000">
+      <defs>
+        <style>
+          .cls-1 {
+            filter: url(#filter);
+          }
+
+          .cls-2 {
+            fill: none;
+            stroke: #df111a;
+            stroke-width: 3px;
+          }
+        </style>
+        <filter id="filter" filterUnits="userSpaceOnUse">
+          <feFlood result="flood" flood-color="#03c1ff" />
+          <feComposite result="composite" operator="in" in2="SourceGraphic" />
+          <feBlend result="blend" in2="SourceGraphic" />
+        </filter>
+      </defs>
+      <g id="组_63_拷贝" data-name="组 63 拷贝" class="cls-1">
+        <circle id="椭圆_772_拷贝_2" data-name="椭圆 772 拷贝 2" class="cls-2" cx="626.5" cy="477.813" r="100" />
+        <circle id="椭圆_772_拷贝_7" data-name="椭圆 772 拷贝 7" class="cls-2" cx="626.5" cy="477.813" r="100" />
+        <circle id="椭圆_772_拷贝_8" data-name="椭圆 772 拷贝 8" class="cls-2" cx="626.5" cy="477.813" r="100" />
+      </g>
+      <g id="组_63_拷贝_2" data-name="组 63 拷贝 2" class="cls-1">
+        <circle id="椭圆_772_拷贝_2-2" data-name="椭圆 772 拷贝 2" class="cls-2" cx="373.5" cy="475.813" r="100" />
+        <circle id="椭圆_772_拷贝_7-2" data-name="椭圆 772 拷贝 7" class="cls-2" cx="373.5" cy="475.813" r="100" />
+        <circle id="椭圆_772_拷贝_8-2" data-name="椭圆 772 拷贝 8" class="cls-2" cx="373.5" cy="475.813" r="100" />
+      </g>
+    </svg>
+
+  </div>
+</body>
+<script src="js/jquery.js"></script>
+<script>
+  var list = [{
+      "positionId": 6,
+      "positionNum": 2,
+      "positionName": "110kV 一母",
+      "isBus": 1,
+      "transformerId": 16,
+      "phaseSequence": "A",
+      "monitiorState": 0,
+      "ratioDifferenceAverage": 0.07,
+      "measuringTime": "2020-07-10 00:00:00",
+      "adata": {
+        "val": 0.07,
+        "status": 0
+      },
+      "bdata": {
+        "val": 0.175,
+        "status": 1
+      },
+      "cdata": {
+        "val": 0.138,
+        "status": 2
+      },
+      "datas": [{
+          "val": 0.07,
+          "status": 0
+        },
+        {
+          "val": 0.175,
+          "status": 1
+        },
+        {
+          "val": 0.138,
+          "status": 2
+        }
+      ]
+    },
+    {
+      "positionId": 8,
+      "positionNum": 4,
+      "positionName": "110kV 二母",
+      "isBus": 1,
+      "transformerId": 22,
+      "phaseSequence": "A",
+      "monitiorState": 0,
+      "ratioDifferenceAverage": 0.067,
+      "measuringTime": "2020-07-10 00:00:00",
+      "adata": {
+        "val": 0.067,
+        "status": 0
+      },
+      "bdata": {
+        "val": 0.082,
+        "status": 1
+      },
+      "cdata": {
+        "val": -1.903,
+        "status": 2
+      },
+      "datas": [{
+        "val": 0.067,
+        "status": 1
+      }, {
+        "val": 0.082,
+        "status": 1
+      }, {
+        "val": -1.903,
+        "status": 2
+      }]
+    },
+    {
+      "positionId": 5,
+      "positionNum": 1,
+      "positionName": "220kV 一母",
+      "isBus": 1,
+      "transformerId": 13,
+      "phaseSequence": "A",
+      "monitiorState": 0,
+      "ratioDifferenceAverage": 0.024,
+      "measuringTime": "2020-07-10 00:00:00",
+      "adata": {
+        "val": 0.024,
+        "status": 0
+      },
+      "bdata": {
+        "val": 0.065,
+        "status": 0
+      },
+      "cdata": {
+        "val": 0.096,
+        "status": 0
+      }
+    },
+    {
+      "positionId": 7,
+      "positionNum": 3,
+      "positionName": "220kV 二母",
+      "isBus": 1,
+      "transformerId": 19,
+      "phaseSequence": "A",
+      "monitiorState": 0,
+      "ratioDifferenceAverage": 0.15,
+      "measuringTime": "2020-07-10 00:00:00",
+      "adata": {
+        "val": 0.15,
+        "status": 0
+      },
+      "bdata": {
+        "val": 0.062,
+        "status": 0
+      },
+      "cdata": {
+        "val": 0.1,
+        "status": 0
+      }
+    }
+  ].slice(0, 2)
+</script>
+<script>
+  console.log('list', list)
+  const classType = ['normal', 'warning', 'abnormal']
+  const trans = document.querySelectorAll('.transformer')
+  list.forEach((item, index) => {
+    //  $('.transformer circle').addClass('warning')
+    let datas = item.datas
+    datas.forEach((item, jndex) => {
+      // jq写法
+      // $('.transformer').eq(index).find('circle').eq(jndex).addClass(classType[item['status']])
+
+      // 原生js写法
+      trans[index].children[jndex].classList.add(classType[item['status']])
+    })
+  })
+
+
+  // 添加单击事件
+  for (let i = 0; i < trans.length; i++) {
+    trans[i].onclick = function () {
+      showPicture(list[i]['positionId'], list[i]['positionNum'], list[i]['positionName'], i)
+    }
+  }
+
+  // 显示互感器画像
+  function showPicture(positionId, positionNum, positionName, index) {
+    console.log(positionId, positionNum, positionName, index)
+  }
+</script>
+
+</html>
