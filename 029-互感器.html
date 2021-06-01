@@ -31,7 +31,8 @@
       /*转换成透明色*/
       stroke-width: 4;
       stroke: #03C1FF;
-      animation: shink 1s infinite linear;
+      /* animation: shink 1s infinite ease-in-out; */
+      animation: normalAni 1s linear infinite;
     }
 
     .normal {
@@ -67,6 +68,61 @@
         opacity: 0;
       }
     }
+
+    @keyframes normalAni {
+      0% {
+        /* filter: drop-shadow(0px 0px 5px rgba(255, 165, 0, 1)); */
+        filter: drop-shadow(0px 0px 5px #03C1FF);
+        /* opacity: 1; */
+      }
+
+      50% {
+        filter: drop-shadow(0px 0px 10px #03C1FF);
+        /* opacity: 0.5; */
+      }
+
+      100% {
+        filter: drop-shadow(0px 0px 5px #03C1FF);
+        /* opacity: 0; */
+      }
+    }
+
+    @keyframes warningAni {
+      0% {
+        filter: drop-shadow(0px 0px 5px #00FF00);
+        /* opacity: 1; */
+      }
+
+      50% {
+        filter: drop-shadow(0px 0px 10px #00FF00);
+        /* opacity: 0.5; */
+      }
+
+      100% {
+        filter: drop-shadow(0px 0px 5px #00FF00);
+        /* opacity: 0; */
+      }
+    }
+
+    @keyframes abnormalAni {
+      0% {
+        filter: drop-shadow(0px 0px 5px #FFA500);
+        /* opacity: 1; */
+      }
+
+      50% {
+        filter: drop-shadow(0px 0px 10px #FFA500);
+        /* opacity: 0.5; */
+      }
+
+      100% {
+        filter: drop-shadow(0px 0px 5px #FFA500);
+        /* opacity: 0; */
+      }
+    }
+
+
+
   </style>
 </head>
 
@@ -80,18 +136,10 @@
             stroke: #00a0e9;
             stroke-width: 4px;
           }
-          .shadow {
-            filter: url(#filter);
-          }
         </style>
-        <filter id="filter" filterUnits="userSpaceOnUse">
-          <feFlood result="flood" flood-color="#03c1ff"/>
-          <feComposite result="composite" operator="in" in2="SourceGraphic"/>
-          <feBlend result="blend" in2="SourceGraphic"/>
-        </filter>
       </defs>
       <g id="组2" class="transformer">
-        <circle id="circle3" class="cls-1 shadow" cx="383" cy="529" r="145" />
+        <circle id="circle3" class="cls-1" cx="383" cy="529" r="145" />
         <circle id="circle2" class="cls-1" cx="579" cy="529" r="145" />
         <circle id="circle1" class="cls-1" cx="485" cy="401" r="145" />
       </g>
@@ -225,6 +273,7 @@
 <script>
   console.log('list', list)
   const classType = ['normal', 'warning', 'abnormal']
+  const aniType = ['normalAni', 'warningAni', 'abnormalAni']
   const trans = document.querySelectorAll('.transformer')
   list.forEach((item, index) => {
     //  $('.transformer circle').addClass('warning')
@@ -235,6 +284,7 @@
 
       // 原生js写法
       trans[index].children[jndex].classList.add(classType[item['status']])
+      trans[index].children[jndex].style.animationName = aniType[item['status']]
     })
   })
 
