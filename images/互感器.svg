@@ -1,0 +1,21 @@
+<svg id="互感器组" xmlns="http://www.w3.org/2000/svg" width="1890" height="1417" viewBox="0 0 1890 1417">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #00a0e9;
+        stroke-width: 4px;
+      }
+    </style>
+  </defs>
+  <g id="组1" class="transformer">
+    <circle id="circle2" class="cls-1" cx="770" cy="331" r="30"/>
+    <circle id="circle1" class="cls-1" cx="790" cy="353" r="30"/>
+    <circle id="circle3" class="cls-1" cx="754" cy="355" r="30"/>
+  </g>
+  <g id="组2" class="transformer">
+    <circle id="circle2-2" data-name="circle2" class="cls-1" cx="902" cy="333" r="30"/>
+    <circle id="circle1-2" data-name="circle1" class="cls-1" cx="922" cy="355" r="30"/>
+    <circle id="circle3-2" data-name="circle3" class="cls-1" cx="886" cy="357" r="30"/>
+  </g>
+</svg>
