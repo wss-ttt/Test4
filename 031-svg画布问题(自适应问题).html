@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .box {
+    width: 600px;
+    height: 600px;
+    background-color: #ccc;
+  }
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+</style>
+
+<body>
+  <div class="box">
+    <svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600" style="border: 1px solid red;">
+      <defs>
+        <style>
+          .cls-1 {
+            fill: none;
+            stroke: #00a0e9;
+            stroke-width: 4px;
+          }
+        </style>
+      </defs>
+      <circle id="椭圆_1" data-name="椭圆 1" class="cls-1" cx="230.5" cy="213.5" r="82.5" />
+      <circle id="椭圆_1-2" data-name="椭圆 1" class="cls-1" cx="299.5" cy="299.5" r="82.5" />
+      <circle id="椭圆_1-3" data-name="椭圆 1" class="cls-1" cx="193.5" cy="299.5" r="82.5" />
+      <circle id="椭圆_1-4" data-name="椭圆 1" class="cls-1" cx="442.5" cy="422.5" r="82.5" />
+      <circle id="椭圆_1-5" data-name="椭圆 1" class="cls-1" cx="511.5" cy="508.5" r="82.5" />
+      <circle id="椭圆_1-6" data-name="椭圆 1" class="cls-1" cx="405.5" cy="508.5" r="82.5" />
+    </svg>
+  </div>
+</body>
+<script>
+  const svg = document.querySelector('svg')
+  console.log('aa', svg)
+  console.log('aal', svg.getAttribute('viewBox'))
+
+</script>
+
+</html>
