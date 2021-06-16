@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<div id="count">10</div>
+	<script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+	<script>
+		// 数字滚动插件封装, 只适合整数的滚动, 并且只能从0开始滚动
+		(function ($) {
+			$.fn.numberRoll = function (options) {
+				var defaults = {
+					startNum: 0,
+					endNum: 100,
+					duration: 2000,
+					easing: 'swing' //swing(默认 : 缓冲 : 慢快慢)  linear(匀速的)
+				};
+				var opts = $.extend({}, defaults, options);
+
+				$(this).animate({
+					name: 'numberRoll'
+				}, {
+					duration: opts.duration,
+					easing: opts.easing,
+					complete: function () {
+						console.log("success");
+					},
+					step: function (a, b) { //可以检测我们定时器的每一次变化
+						// console.log(a);
+						// console.log(b.pos);   //运动过程中的比例值(0~1)
+						$(this).html(parseInt(opts.startNum + b.pos * (opts.endNum - opts.startNum)));
+					}
+				})
+			}
+		})(jQuery);
+	</script>
+	<script>
+		$(function () {
+			$("#count").numberRoll({
+				startNum: 10, // 开始数字
+				endNum: 200, // 结束数字 
+				duration: 5000,
+				easing: 'swing', //慢快慢
+			});
+		});
+	</script>
+</body>
+
+</html>
