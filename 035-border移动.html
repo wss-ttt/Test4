@@ -19,18 +19,18 @@
 			width: 220px;
 			margin: auto;
 			cursor: pointer;
+			background-color: #ccc;
 		}
 
 		.box>.item {
 			flex: 1;
-			background-color: #ccc;
 			padding: 10px;
 		}
 
 		.box .item-border {
 			position: absolute;
-			width: 100%; 
-			height: 85.72px;
+			height: calc(100% / 7);
+			width: 100%;
 			box-sizing: border-box;
 			border: 0;
 			border-radius: 3px;
@@ -58,7 +58,7 @@
 	</div>
 	<script src="js/jquery.js"></script>
 	<script>
-		$('.box .item').on('click', function() {
+		$('.box .item').on('click', function () {
 			var trachangeX = $(this).index() * 85.72 + 'px'
 			$('.item-border').css('transform', "translateY(" + trachangeX + ")")
 		})
