@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		.box {
+			display: flex;
+			flex-direction: column;
+			position: relative;
+			height: 600px;
+			width: 220px;
+			margin: auto;
+			cursor: pointer;
+		}
+
+		.box>.item {
+			flex: 1;
+			background-color: #ccc;
+			padding: 10px;
+		}
+
+		.box .item-border {
+			position: absolute;
+			width: 100%; 
+			height: 85.72px;
+			box-sizing: border-box;
+			border: 0;
+			border-radius: 3px;
+			-webkit-box-shadow: inset 0 0 0 3px #af5000;
+			box-shadow: inset 0 0 0 3px #af5000;
+			-webkit-transition: -webkit-transform .5s cubic-bezier(.86, 0, .07, 1);
+			-o-transition: transform .5s cubic-bezier(.86, 0, .07, 1);
+			transition: transform .5s cubic-bezier(.86, 0, .07, 1);
+			transition: transform .5s cubic-bezier(.86, 0, .07, 1), -webkit-transform .5s cubic-bezier(.86, 0, .07, 1);
+		}
+	</style>
+</head>
+
+<body>
+	<div class="box">
+		<div class="item">1</div>
+		<div class="item">2</div>
+		<div class="item">3</div>
+		<div class="item">4</div>
+		<div class="item">5</div>
+		<div class="item">6</div>
+		<div class="item">7</div>
+		<div class="item-border">
+		</div>
+	</div>
+	<script src="js/jquery.js"></script>
+	<script>
+		$('.box .item').on('click', function() {
+			var trachangeX = $(this).index() * 85.72 + 'px'
+			$('.item-border').css('transform', "translateY(" + trachangeX + ")")
+		})
+	</script>
+</body>
+
+</html>
