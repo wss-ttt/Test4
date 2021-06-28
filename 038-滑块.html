@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		.ProgressBar {
+			background: #f0f0f0;
+			margin: 0 auto;
+			box-sizing: border-box;
+			display: flex;
+			align-items: flex-end;
+			/* box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1) inset; */
+		}
+
+		/* .ProgressBar_v {
+  width: 30px;
+  height: 100%;
+  border-radius: 15px;
+  background: #f0f0f0;
+  margin: 0 auto;
+  box-sizing: border-box;
+} */
+		.ProgressLine {
+			width: 100%;
+			height: 100%;
+			position: relative;
+			border-radius: 15px;
+			background: #eb3e3e;
+		}
+
+		.ProgressLine .btn {
+			position: absolute;
+			height: 100%;
+			right: 0;
+			border-radius: 50%;
+			font-size: 8px;
+			background: #eb3e3e;
+			border: 6px solid #fff;
+			top: 50%;
+			transform: translate(6px, -50%);
+			box-sizing: content-box !important;
+			box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.2);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.ProgressLine .btn.disable {
+			background: #ddd;
+			border-color: #fafafa;
+		}
+
+		.ProgressLine .btn .loading {
+			display: none;
+			position: absolute;
+			content: '';
+			top: 50%;
+			left: 50%;
+			border-radius: 50%;
+			overflow: hidden;
+			transform: translate(-50%, -50%);
+			background: url('../images/loading1.gif');
+			background-position: center center;
+			background-size: 130%;
+			opacity: 0.5;
+			/* animation: rate 2s linear infinite; */
+		}
+
+		@keyframes rate {
+			0% {
+				transform: translate(-50%, -50%) rotate(0deg);
+			}
+
+			100% {
+				transform: translate(-50%, -50%) rotate(360deg);
+			}
+		}
+
+		.vertical {
+			top: 0 !important;
+			left: 50% !important;
+			transform: translate(-50%, -6px) !important;
+		}
+
+		.ProgressBar .progressVal {
+			position: absolute;
+			right: 0;
+			background: rgba(0, 0, 0, 0.4);
+			text-align: center;
+			width: 45px;
+			box-sizing: border-box;
+			padding: 0 4px;
+			font-size: 10px;
+			color: #fff;
+			height: 20px;
+			line-height: 20px;
+			border-radius: 4px;
+			top: -35px;
+			left: 50%;
+			transform: translateX(-50%);
+			transition: 0.5s linear;
+		}
+
+		.ProgressBar .progressVal.bottom {
+			top: auto;
+			bottom: -35px;
+		}
+
+		.ProgressBar .progressVal::after {
+			position: absolute;
+			content: '';
+			border-width: 5px 5px 0;
+			border-style: solid;
+			border-color: rgba(0, 0, 0, 0.4) transparent transparent;
+			bottom: -5px;
+			left: 50%;
+			transform: translateX(-50%);
+		}
+
+		.ProgressBar .progressVal.bottom::after {
+			bottom: auto;
+			top: -5px;
+			border-width: 0 5px 5px;
+			border-style: solid;
+			border-color: transparent transparent rgba(0, 0, 0, 0.4);
+		}
+
+		.ProgressBar .progressVal.left {
+			top: auto;
+			left: -40px;
+		}
+
+		.ProgressBar .progressVal.left::after {
+			top: 50%;
+			transform: translateY(-50%);
+			left: auto;
+			right: -5px;
+			bottom: auto;
+			border-width: 5px 0 5px 5px;
+			border-style: solid;
+			border-color: transparent transparent transparent rgba(0, 0, 0, 0.4);
+		}
+
+		.ProgressBar .progressVal.right {
+			top: auto;
+			right: -85px;
+			left: auto;
+		}
+
+		.ProgressBar .progressVal.right::after {
+			top: 50%;
+			transform: translateY(-50%);
+			right: auto;
+			left: -5px;
+			bottom: auto;
+			border-width: 5px 5px 5px 0;
+			border-style: solid;
+			border-color: transparent rgba(0, 0, 0, 0.4) transparent transparent;
+		}
+	</style>
+	<style>
+		.box {
+			width: 600px;
+			height: 400px;
+			margin: 100px auto;
+		}
+		.progress {
+			margin: 0 auto;
+		}
+
+		.progress2 {
+			margin: 0 20px;
+			height: 100px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="box">
+		<div class="progress"></div>
+		<div class="progress2"></div>
+		<div class="progress3"></div>
+	</div>
+	<script src="js/jquery.js"></script>
+	<script>
+		;
+		(function (window) {
+			//创建滑块构造函数
+
+			function Progress(
+				target, {
+					size = 10,
+					val = 0,
+					precision = 0,
+					getVal = () => {},
+					drag = true,
+					direction = 'horizontal',
+					tip = false
+				} = {}
+			) {
+				if (!target) return alert('必须指定实例对象的容器！')
+				//指定实例容器
+				this.container = document.querySelector(target)
+				this.size = size
+				this.val = val
+				this.precision = precision
+				this.getVal = getVal
+				this.drag = drag
+				this.direction = direction
+				if (typeof tip === 'object') {
+					this.tip = tip || {
+						trigger: 'show', // hover
+						align: 'top' // bottom
+					}
+				} else if (typeof tip != 'boolean') {
+					return alert('tip配置错误')
+				}
+				this.initialize()
+			}
+
+			Progress.prototype = {
+				constructor: Progress,
+				//初始化
+				initialize: function () {
+					if (
+						this.size < 0 ||
+						this.val < 0 ||
+						this.val > 100 ||
+						this.precision < 0 ||
+						this.precision > 4 ||
+						(this.direction != 'horizontal' && this.direction != 'vertical') ||
+						!this.container ||
+						(typeof this.drag != 'boolean' && typeof this.drag != 'object')
+					)
+						return console.error('参数配置错误！')
+					//调用渲染
+					this.rander()
+					this.renderLine()
+				},
+				//渲染方法
+				rander: function () {
+					this.bgBar = document.createElement('div')
+					this.bgLine = document.createElement('div')
+					this.btnTip = document.createElement('div')
+
+					const {
+						bgBar,
+						container,
+						bgLine,
+						btnTip
+					} = this
+
+					//渲染bgBar
+					switch (this.direction) {
+						case 'horizontal':
+							bgBar.classList.add('ProgressBar')
+							bgBar.style.height = this.size + 'px'
+							bgBar.style.width = 100 + '%'
+							bgBar.style.borderRadius = this.size / 2 + 'px'
+							//添加btn
+							bgLine.appendChild(btnTip)
+
+							break
+						case 'vertical':
+							bgBar.classList.add('ProgressBar')
+							bgBar.style.width = this.size + 'px'
+							bgBar.style.height = 100 + '%'
+							bgBar.style.borderRadius = this.size / 2 + 'px'
+							//添加btn
+							btnTip.classList.add('vertical')
+							bgLine.appendChild(btnTip)
+							break
+					}
+					//渲染btn
+					btnTip.classList.add('btn')
+					btnTip.style.width = this.size + 'px'
+					btnTip.style.height = this.size + 'px'
+					//渲染bgLine
+					bgLine.classList.add('ProgressLine')
+					bgLine.style.borderRadius = this.size / 2 + 'px'
+					bgBar.appendChild(bgLine)
+
+					container.appendChild(bgBar)
+
+					//是否开启拖拽
+					if (this.drag) {
+						this.Dragdrop()
+					} else {
+						this.btnTip.classList.add('disable')
+					}
+					//是否开启tip
+					if (this.tip || typeof this.tip === 'object') this.openTip()
+
+					//开启loading
+					this.onLoading()
+				},
+
+				//拖拽方法
+				Dragdrop: function () {
+					const bgBar = this.bgBar
+					const mothes = e => {
+						// e.preventDefault()
+						// e.stopPropagation()
+						this.getPos(e)
+					}
+
+					bgBar.addEventListener('mousedown', e => {
+						document.addEventListener('mousemove', mothes)
+						this.getPos(e)
+					})
+					document.addEventListener('mouseup', e => {
+						document.removeEventListener('mousemove', mothes)
+					})
+					bgBar.addEventListener('touchstart', e => {
+						document.addEventListener('touchmove', mothes)
+						this.getPos(e)
+					})
+					document.addEventListener('touchend', e => {
+						document.removeEventListener('touchmove', mothes)
+					})
+				},
+
+				//获取鼠标位置事件
+				getPos: function (event) {
+					if (typeof event.touches === 'undefined') {
+						event.preventDefault()
+						event.stopPropagation()
+					}
+					if (event.touches) event = event.touches[0]
+					this.oldVal = this.val
+					switch (this.direction) {
+						case 'horizontal':
+							let clX = event.clientX + this.size / 2 //鼠标X轴位置
+							let bgBarW = this.bgBar.clientWidth //bgbar宽度
+							let bgBarLeft = this.getElementLeft(this.bgBar)
+							this.val =
+								((clX - bgBarLeft - this.size) / (bgBarW - this.size)) * 100
+							break
+						case 'vertical':
+							let clY = event.clientY + this.size / 2 //鼠标X轴位置
+							let bgBarH = this.bgBar.clientHeight //bgbar宽度
+							let bgBarTop = this.getElementTop(this.bgBar)
+							this.val =
+								100 - ((clY - bgBarTop - this.size) / (bgBarH - this.size)) * 100
+							break
+					}
+
+					this.val = Math.max(0, this.val)
+					this.val = Math.min(100, this.val)
+					this.renderLine()
+					this.eventVal()
+				},
+
+				//获取元素距离屏幕左端的位置
+				getElementLeft: function (element) {
+					let {
+						offsetLeft,
+						offsetParent
+					} = element
+					while (offsetParent !== null) {
+						offsetLeft += offsetParent.offsetLeft
+						offsetParent = offsetParent.offsetParent
+					}
+					return offsetLeft
+				},
+				//获取元素距离屏幕上端的位置
+				getElementTop: function (element) {
+					let {
+						offsetTop,
+						offsetParent
+					} = element
+					while (offsetParent !== null) {
+						offsetTop += offsetParent.offsetTop
+						offsetParent = offsetParent.offsetParent
+					}
+					return offsetTop
+				},
+				//渲染line宽度
+				renderLine: function () {
+					switch (this.direction) {
+						case 'horizontal':
+							this.bgLine.style.width =
+								((this.bgBar.clientWidth - this.size) * this.val) / 100 +
+								this.size +
+								'px'
+							break
+						case 'vertical':
+							this.bgLine.style.height =
+								((this.bgBar.clientHeight - this.size) * this.val) / 100 +
+								this.size +
+								'px'
+							break
+					}
+				},
+				//获取默认值
+				eventVal: function () {
+					this.val = +this.val.toFixed(this.precision)
+					if (this.oldVal === this.val) {
+						return
+					}
+					//  this.val = this.val
+					//  console.log(this.val)
+					this.getVal && this.getVal(this)
+					if (this.tip || typeof this.tip === 'object')
+						this.tipBox.innerText = `${this.val}%`
+				},
+				//更新默认值
+				updateVal: function (res) {
+					if (res < 0 || res > 100) return
+					this.val = +res
+					this.renderLine()
+					this.val = +res.toFixed(this.precision)
+					if (this.tip || typeof this.tip === 'object')
+						this.tipBox.innerText = `${this.val}%`
+				},
+				//开启tip
+				openTip: function () {
+					//console.log(this)
+					const btnTip = this.btnTip
+					this.tipBox = document.createElement('span')
+					this.tipBox.classList.add('progressVal')
+					this.tipBox.innerText = `${this.val}%`
+					btnTip.appendChild(this.tipBox)
+					this.tip.trigger && this.tipConfig()
+				},
+				//配置tip
+				tipConfig: function () {
+					//console.log(this.tip.trigger)
+					switch (this.tip.trigger) {
+						case 'hover':
+							this.tipBox.style.opacity = 0
+							this.bgBar.addEventListener(
+								'mouseenter',
+								() => (this.tipBox.style.opacity = 1)
+							)
+							this.bgBar.addEventListener(
+								'mouseleave',
+								() => (this.tipBox.style.opacity = 0)
+							)
+							this.bgBar.addEventListener(
+								'touchstart',
+								() => (this.tipBox.style.opacity = 1)
+							)
+							this.bgBar.addEventListener(
+								'touchend',
+								() => (this.tipBox.style.opacity = 0)
+							)
+							break
+						case 'show':
+							this.tipBox.style.opacity = 1
+							break
+					}
+
+					switch (this.tip.align) {
+						case 'bottom':
+							this.tipBox.classList.add('bottom')
+							break
+						case 'left':
+							this.tipBox.classList.add('left')
+							break
+						case 'right':
+							this.tipBox.classList.add('right')
+							break
+					}
+				},
+				//开启Loading
+				onLoading: function () {
+					this.btnLoading = document.createElement('span')
+					const {
+						btnLoading,
+						btnTip
+					} = this
+					btnLoading.classList.add('loading')
+					btnTip.appendChild(btnLoading)
+					btnLoading.style.width = btnTip.offsetWidth + 'px'
+					btnLoading.style.height = btnTip.offsetHeight + 'px'
+				},
+				onLoad: function (e, callback = () => {}) {
+					if (typeof e !== 'boolean') return alert('onload配置错误')
+					if (e) this.btnLoading.style.display = 'block'
+					callback(this)
+				}
+			}
+
+			window.Progress = Progress
+		})(window)
+	</script>
+	<script>
+		var timeID
+		var pro = new Progress('.progress', {
+			val: 0, //初始值 取值范围：0-100
+			size: 4, //控件大小默认值为10，可结合css自行修改样式
+			precision: 2, //val精度配置，默认保留0位小数,最多配位4位
+			drag: true, //默认开启拖拽，关闭设为false，不配置默认为true
+			direction: 'horizontal', //方向 默认水平 vertical 垂直
+
+			/*tip数值提示
+			 tip:true开启
+			 tip:false关闭，默认不设为关闭
+			 配置对象时tip默认开启
+			 tip: {
+				trigger: 'show', //一直显示;'hover'：'hover':tip鼠标hover显示，默认为'show'
+				align: 'bottom'//显示位置,默认为'top',  可设置'top,bottom,left,right'
+			 }
+			*/
+			tip: {
+				trigger: 'show', //
+				align: 'bottom'
+			},
+			//获取val回调方法
+			getVal: function (el) {
+				// console.log(el) //这个进度条对象
+				console.log(el.val)
+			}
+		})
+
+		pro.onLoad(false)
+
+		/*
+		动态更新val方法
+		 var pro = new Progress()
+			pro.updateVal(val)
+		*/
+
+		// pro.onLoad(true) //true  开启LoadIng  false 关闭loading
+
+		//模拟音视频时间轴更新
+		// var i = 0
+		// timeID = setInterval(function() {
+		//   i += 0.1
+		//   pro.updateVal(i)
+		//   console.log(pro.val)
+		//   if (i >= 100) {
+		//     clearInterval(timeID)
+		//   }
+		// }, 15)
+		//垂直显示
+		new Progress('.progress2', {
+			val: 0,
+			size: 20,
+			precision: 2,
+			direction: 'vertical', //方向 默认水平 vertical 垂直
+			tip: {
+				trigger: 'hover',
+				align: 'left'
+			},
+			//loading: true,
+			getVal: function (el) {
+				console.log(el.val)
+			}
+		})
+
+		//禁用拖拽
+		new Progress('.progress3', {
+			drag: false,
+			tip: false
+		})
+	</script>
+</body>
+
+</html>
