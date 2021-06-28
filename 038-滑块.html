@@ -284,11 +284,11 @@
 							bgLine.appendChild(btnTip)
 							break
 					}
-					//渲染btn
+					//渲染btn -> 滑块的样式
 					btnTip.classList.add('btn')
 					btnTip.style.width = this.size + 'px'
 					btnTip.style.height = this.size + 'px'
-					//渲染bgLine
+					//渲染bgLine -> 进度条的样式
 					bgLine.classList.add('ProgressLine')
 					bgLine.style.borderRadius = this.size / 2 + 'px'
 					bgBar.appendChild(bgLine)
@@ -392,12 +392,14 @@
 				renderLine: function () {
 					switch (this.direction) {
 						case 'horizontal':
+							// 水平的情况下: 设置宽度
 							this.bgLine.style.width =
 								((this.bgBar.clientWidth - this.size) * this.val) / 100 +
 								this.size +
 								'px'
 							break
 						case 'vertical':
+							// 垂直的情况下: 设置高度
 							this.bgLine.style.height =
 								((this.bgBar.clientHeight - this.size) * this.val) / 100 +
 								this.size +
@@ -518,11 +520,11 @@
 			*/
 			tip: {
 				trigger: 'show', //
-				align: 'bottom'
+				align: 'top'
 			},
 			//获取val回调方法
 			getVal: function (el) {
-				// console.log(el) //这个进度条对象
+				console.log(el) //这个进度条对象
 				console.log(el.val)
 			}
 		})
