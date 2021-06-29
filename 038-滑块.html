@@ -181,6 +181,7 @@
 		.progress2 {
 			margin: 0 20px;
 			height: 100px;
+			position: relative;
 		}
 	</style>
 </head>
@@ -341,9 +342,13 @@
 					this.oldVal = this.val
 					switch (this.direction) {
 						case 'horizontal':
+							// event.clientX: 鼠标距离浏览器可视区域的距离
 							let clX = event.clientX + this.size / 2 //鼠标X轴位置
+							// clientWidth: 获取的是元素的可见区域的宽度(不包括滚动条和边框)
 							let bgBarW = this.bgBar.clientWidth //bgbar宽度
 							let bgBarLeft = this.getElementLeft(this.bgBar)
+							// 计算val值(重要)
+							// (鼠标点击的地方距离屏幕左端的距离 - 进度条bgBar距离左边的距离 - 滑块的大小(宽度))/(baBar的宽度 - 滑块的大小(宽度))
 							this.val =
 								((clX - bgBarLeft - this.size) / (bgBarW - this.size)) * 100
 							break
@@ -351,6 +356,7 @@
 							let clY = event.clientY + this.size / 2 //鼠标X轴位置
 							let bgBarH = this.bgBar.clientHeight //bgbar宽度
 							let bgBarTop = this.getElementTop(this.bgBar)
+							// 同理
 							this.val =
 								100 - ((clY - bgBarTop - this.size) / (bgBarH - this.size)) * 100
 							break
@@ -364,6 +370,12 @@
 
 				//获取元素距离屏幕左端的位置
 				getElementLeft: function (element) {
+					// console.log('offsetLeft', element.offsetLeft)
+					// offsetLeft: 获取的是当前元素到 定位父节点的 left方向的距离
+					// offsetTop: 获取当前元素到 定位父节点 的top方向的距离
+					// console.log('offsetParent', element.offsetParent)
+					// offsetParent: 如果当前对象的父级没有进行css定位(relative absolute fixed的一种), 那么offsetParent为body元素
+					// 如果当前元素的父级有css定位属性(relative absolute fixed的一种),那么offsetParent为就近的那个父元素
 					let {
 						offsetLeft,
 						offsetParent
@@ -371,6 +383,7 @@
 					while (offsetParent !== null) {
 						offsetLeft += offsetParent.offsetLeft
 						offsetParent = offsetParent.offsetParent
+						console.log('offsetParent', offsetParent)
 					}
 					return offsetLeft
 				},
@@ -522,8 +535,8 @@
 			},
 			//获取val回调方法
 			getVal: function (el) {
-				console.log(el) //这个进度条对象
-				console.log(el.val)
+				// console.log(el) //这个进度条对象
+				// console.log(el.val)
 			}
 		})
 
