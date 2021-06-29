@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      width: 100px;
+      height: 300px;
+      background: #bb3;
+      position: relative;
+      margin: auto;
+    }
+
+    .box {
+      width: 100px; /*大小和父级元素宽度一样*/
+      border: 10px solid red; /*这里有边框*/
+      height: 200px;
+      position: absolute;
+      background: #1acd7e;
+      right: 0;
+      transform: translateX(10px);/*这里需要偏移一个边框的距离*/
+    }
+
+    .container2  {
+      width: 400px;
+      height: 400px;
+      background: #ccc;
+      margin: auto;
+      position: relative;
+    }
+
+    .box2 {
+      width: 100px;
+      height: 100px;
+      background: #1acd7e;
+      position: absolute;
+      right: 0;
+      transform: translateX(50%);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 子元素比父元素大的情况 -->
+  <div class="container">
+    <div class="box"></div>
+  </div>
+
+  <!-- 子元素比父元素小的情况 -->
+  <div class="container2">
+    <div class="box2"></div>
+  </div>
+  <script src="js/jquery.js"></script>
+  <script>
+    var box = document.querySelector('.box')
+    console.log('A', box.offsetLeft) // 输出的结果为: 200
+    console.log('B', getElementLeft(box)) // 输出的结果为: 400
+    // 获取元素距离屏幕左端的距离
+    function getElementLeft(element) {
+      let {
+        offsetLeft,
+        offsetParent
+      } = element
+
+      while (offsetParent !== null) {
+        offsetLeft += offsetParent.offsetLeft
+        offsetParent = offsetParent.offsetParent
+      }
+
+      return offsetLeft
+    }
+  </script>
+</body>
+
+</html>
