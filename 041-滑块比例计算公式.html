@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      width: 500px;
+      height: 500px;
+      background: #ccc;
+      position: relative;
+      margin: auto;
+    }
+
+    .container .progress-bar {
+      width: 100%;
+      height: 5px;
+      background: #bb4;
+      position: absolute;
+      top: 200px
+    }
+
+    .container .progress-bar .progress-line {
+      position: relative;
+      border-radius: 2px;
+      width: 4px;
+      height: 100%;
+      background: green;
+    }
+
+    .container .progress-bar .slider {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      border: 6px solid #fff;
+      background: #eb3e3e;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="progress-bar">
+      <div class="progress-line">
+        <div class="slider"></div>
+      </div>
+    </div>
+  </div>
+  <script src="js/jquery.js"></script>
+  <script>
+    // 获取元素距离屏幕左端的距离
+    function getElementLeft(element) {
+      let {
+        offsetLeft,
+        offsetParent
+      } = element
+
+      while (offsetParent !== null) {
+        offsetLeft += offsetParent.offsetLeft
+        offsetParent = offsetParent.offsetParent
+      }
+
+      return offsetLeft
+    }
+  </script>
+</body>
+
+</html>
