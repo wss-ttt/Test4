@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		.box {
+			width: 400px;
+			height: 400px;
+			background: #bb3;
+			margin: 100px auto;
+		}
+		.row {
+			margin-left: -10px;
+			margin-right: -10px;
+		}
+		.row>div.col {
+			width: 25%;
+			float: left;
+			height: 100%;
+			padding: 0 10px;
+		}
+		.item {
+			border: 1px solid red;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="box">
+		<div class="row">
+			<div class="col">
+				<div class="item">001</div>
+			</div>
+			<div class="col">
+				<div class="item">002</div>
+			</div>
+			<div class="col">
+				<div class="item">003</div>
+			</div>
+			<div class="col">
+				<div class="item">004</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
