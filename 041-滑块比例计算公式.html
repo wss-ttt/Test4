@@ -21,7 +21,7 @@
 
     .container .progress-bar {
       width: 100%;
-      height: 5px;
+      height: 4px;
       background: #bb4;
       position: absolute;
       top: 200px
@@ -42,24 +42,91 @@
       border: 6px solid #fff;
       background: #eb3e3e;
       position: absolute;
+
+      /*这个地方需要这样写*/
       top: 50%;
+      right: 0;
+      transform: translate(6px, -50%);
+      /*不能这样写*/
+      /* top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%); */
+    }
+
+    .container .progress-bar .slider .val {
+      position: absolute;
+      right: 0;
+      background: rgba(0, 0, 0, 0.4);
+      text-align: center;
+      width: 45px;
+      box-sizing: border-box;
+      padding: 0 4px;
+      font-size: 10px;
+      color: #fff;
+      height: 20px;
+      line-height: 20px;
+      border-radius: 4px;
+      top: -35px;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: 0.5s linear;
 
     }
   </style>
 </head>
 
 <body>
+  <button type="button">确定</button>
   <div class="container">
     <div class="progress-bar">
       <div class="progress-line">
-        <div class="slider"></div>
+        <div class="slider">
+          <span class="val">0</span>
+        </div>
       </div>
     </div>
   </div>
   <script src="js/jquery.js"></script>
   <script>
+    const progressBar = document.querySelector('.progress-bar')
+    const progressLine = document.querySelector('.progress-line')
+    const slider = document.querySelector('.slider')
+    const valDom = document.querySelector('.val')
+    let precision = 2 // 设置精度
+    let val = 0
+    $('button').on('click', function () {
+      $('.progress-line').css({
+        width: '30%'
+      })
+    })
+    progressBar.addEventListener('mousedown', e => {
+      document.addEventListener('mousemove', getPos)
+    })
+
+    document.addEventListener('mouseup', e => {
+      document.removeEventListener('mousemove', getPos)
+    })
+
+    function getPos(event) {
+      let clX = event.clientX + slider.clientWidth / 2
+      let progressBarW = progressBar.clientWidth // 进度条的宽度
+      let progressBarLeft = getElementLeft(progressBar)
+      val = ((clX - progressBarLeft - slider.clientWidth / 2) / (progressBarW - slider.clientWidth / 2)) * 100
+      val = +val.toFixed(precision)
+      // val的只能是在[0, 100]之间 -> 这个地方的使用比较巧妙
+      val = Math.max(0, val)
+      val = Math.min(100, val)
+      console.log('val', val)
+      renderLine()
+    }
+
+    function renderLine() {
+      progressLine.style.width = ((progressBar.clientWidth - slider.clientWidth) * val) / 100 +
+        slider.clientWidth +
+        'px'
+      valDom.innerHTML = val + '%'
+    }
+
     // 获取元素距离屏幕左端的距离
     function getElementLeft(element) {
       let {
